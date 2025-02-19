@@ -1,0 +1,36 @@
+/nbproject/private/
+/node_modules/
+/node_modules
+package-lock.json
+
+log_files/*
+app/ios_push/*
+config/data/*
+config/env/*
+data/partner_document/*
+data/partner_profile/*
+data/provider_document/*
+data/provider_profile/*
+data/service_type_images/*
+data/service_type_map_pin_images/*
+data/user_document/*
+data/user_profile/*
+data/xlsheet/*
+# data/language/*
+
+# exception to the rule
+!log_files/.gitkeep
+!app/ios_push/.gitkeep
+!config/data/.gitkeep
+!data/partner_document/.gitkeep
+!data/partner_profile/.gitkeep
+!data/provider_document/.gitkeep
+!data/provider_profile/.gitkeep
+!data/service_type_images/.gitkeep
+!data/service_type_map_pin_images/.gitkeep
+!data/user_document/.gitkeep
+!data/user_profile/.gitkeep
+!data/xlsheet/.gitkeep
+!data/language/.gitkeep
+
+.scannerwork/*

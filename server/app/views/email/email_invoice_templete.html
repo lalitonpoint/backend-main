@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+    <body>
+        <table border="0" heigth="auto"
+        style="width: 100%; background-color: #ffffff; border-collapse: separate !important; border-spacing: 0; color: #242128; margin: 0; padding: 30px; padding-top: 0px;" aria-hidden="true">
+        <tbody>
+            <tr>
+                <td colspan="2" style="padding-top: 30px;">
+                    <table style="width: 100%;" aria-hidden="true">
+                        <tbody>
+                            <tr>
+                                <td
+                                    style="text-align: center; padding: 30px; padding-top: 0px; padding-bottom: 0; vertical-align: middle;background-color: #f9f9f9; border-radius: 3px; border-left: 5px solid white;">
+                                    <p
+                                        style="font-weight: 700; font-size: 24px; padding: 0; line-height: 1.6; margin: 0;">
+                                        Trip Id : <%= unique_id %> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 20px;margin-bottom: 20px;">
+                        <div style="width: 30%; text-align: center; display: inline-block;">
+                            <p class="text-muted mb-1">Distance</p>
+                            <p><%= distance %> km</p>
+                        </div>
+                        <div style="width: 30%; text-align: center;display: inline-block;">
+                            <p class="text-muted mb-1">Time</p>
+                            <p><%= time %>min</p>
+                        </div>
+                        <div style="width: 30%; text-align: center;display: inline-block;">
+                            <p class="text-muted mb-1">Waiting Time</p>
+                            <p><%= waiting_time %>min</p>
+                        </div>
+                    </div>
+                    <div class="invoice">
+                        <div style="width:100%">
+                            <div class="invoice-contents">
+                                <table style="border-collapse: separate; width: 100%; margin-bottom: 16px ;" aria-hidden="true">
+                                    <thead class="border-bottom" style="background-color: #f3f3f3!important;">
+                                        <tr class="px-0 border-bottom">
+                                            <th>
+                                                <p style="text-align: start;padding-left: 20px;">
+                                                    Ride Charge
+                                                        <% if(case_number == 1){ %>
+                                                        <span >Airport Price</span>
+                                                         <% } %>
+                                                        <% if(case_number == 2){ %>
+                                                        <span >Zone Price</span>
+                                                        <% } %>
+                                                        <% if(case_number == 3){ %>
+                                                        <span >City Price</span>
+                                                         <% } %> 
+                                                        <% if(case_number == 4){ %>
+                                                        <span >Fixed Price</span>
+                                                         <% } %>
+                                                        <% if(case_number == 5){ %>
+                                                        <span >Minimum Fare</span> 
+                                                        <% } %>:
+                                                </p>
+                                            </th>
+                                            <th class="text-right pr-ltr-3" style="width: 140px;">
+                                                <p style="text-align: center;"><%= currency %><%= ride_charge %></p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="">
+                                        <% if(is_show_total){ %>
+                                        <tr >
+                                            <td style="text-align: start;padding-left: 20px;">
+                                                <p class="mb-0"> Base Price (<%= currency %><%= base_price %>km)</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= base_distance_cost %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(is_show_total){ %>
+                                        <tr>
+                                            <td style="text-align: start; padding-left: 20px;">
+                                                <p class="mb-0">Distance Price(<%= currency %><%= distance_price %>/km)
+                                                <p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= distance_cost %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(is_show_total){ %>
+                                        <tr>
+                                            <td style="text-align: start;padding-left: 20px;">
+                                                <p class="mb-0">Time Price (<%= currency %><%= price_for_total_time %>/min)</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= time_price %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(is_show_total){ %>
+                                        <tr>
+                                            <td style="text-align: start;padding-left: 20px;">
+                                                <p class="mb-0">Waiting Price</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= waiting_time_cost %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(trip.stop_waiting_time_cost != 0 && is_show_total){ %>
+                                        <tr>
+                                            <td style="text-align: start;padding-left: 20px;">
+                                                <p class="mb-0">Stops Wait time price <%= currency %></p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= stop_waiting_time_cost %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(is_show_total && trip.surge_fee > 0){ %>
+                                        <tr>
+                                            <td style="text-align: start;padding-left: 20px;">
+                                                <p class="mb-0">Surge ( x<%= surge_multiplier %> )
+                                                </p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= surge_fee %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(!is_show_total || (is_show_total && case_number == 5)){ %>
+                                        <tr>
+                                            <td style="text-align: start;padding-left: 20px;">
+                                                <p class="mb-0">Services Fees</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= total_after_surge_fees %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                                <table style="border-collapse: separate;width: 100%;margin-bottom: 16px" aria-hidden="true">
+                                    <thead class="border-bottom" style="background-color: #f3f3f3!important;">
+                                        <tr class="px-0 border-bottom">
+                                            <th>
+                                                <p style="text-align: left;padding-left: 20px;" >Tax Charges</p>
+                                            </th>
+                                            <th style="text-align: center;width: 140px;">
+                                                <p class="mb-0 font-weight-bold text-rtl-left"><%= currency %><%= totalTax %></p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="">
+                                        <tr>
+                                            <td class="px-0 py-1 d-flex" style="padding-left: 20px;">
+                                                <p class="mb-0">User Tax (<%= user_tax %>%)</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= user_tax_fee %></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-0 py-1 d-flex" style="padding-left: 20px;">
+                                                <p class="mb-0  ">Tax</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= tax_fee %></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-0 py-1" style="padding-left: 20px;">
+                                                <p class="mb-0">User Miscellaneous Fee</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= user_miscellaneous_fee %></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table style="border-collapse: separate;width: 100%;margin-bottom: 16px" aria-hidden="true">
+                                    <thead class="border-bottom" style="background-color: #f3f3f3!important;">
+                                        <tr class="px-0 border-bottom">
+                                            <th>
+                                                <p style="text-align: left;padding-left: 20px">Other Charges</p>
+                                            </th>
+                                            <th style="text-align: center;width: 140px;">
+                                                <p class="mb-0 font-weight-bold text-rtl-left"><%= currency %><%= totalOtherCharge %></p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="">
+                                        <tr>
+                                            <td class="px-0 py-1">
+                                                <p class="mb-0" style="padding-left: 20px">Tip</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= tip_amount %></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-0 py-1">
+                                                <p class="mb-0" style="padding-left: 20px">Toll</p>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <p class="mb-0 text-rtl-left"><%= currency %><%= toll_amount %></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table style="border-collapse:separate !important;width: 100%;margin-bottom: 16px" aria-hidden="true">
+
+                                    <thead class="border-bottom">
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 100%;">
+                                                <table 
+                                                    style="border-collapse:separate !important;width: 100%;" aria-hidden="true">                
+                                                    <tbody>
+                                                        <% if(trip.is_cancellation_fee == 1){ %>
+                                                        <tr>
+                                                            <td class="px-0 py-1 text-left text-small" style="padding-left: 20px;">
+                                                                <p class="mb-0" >Cancellation Charge :
+                                                                </p>
+                                                            </td>
+                                                            <td style="text-align: center;width: 140px;">
+                                                                <p class="mb-0 text-rtl-left"><%= currency %><%= total %></p>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                        <tr>
+                                                            <td class="px-0 py-1 text-left text-small" style="padding-left: 20px;">
+                                                                <p class="mb-0" >Ride Charges
+                                                                    <% if(case_number == 1){ %>
+                                                                    <span >Airport Price</span>
+                                                                     <% } %>
+                                                                    <% if(case_number == 2){ %>
+                                                                    <span >Zone Price</span>
+                                                                    <% } %>
+                                                                    <% if(case_number == 3){ %>
+                                                                    <span >City Price</span>
+                                                                     <% } %> 
+                                                                    <% if(case_number == 4){ %>
+                                                                    <span >Fixed Price</span>
+                                                                     <% } %>
+                                                                    <% if(case_number == 5){ %>
+                                                                    <span >Minimum Fare</span> :
+                                                                    <% } %>
+                                                                </p>
+                                                            </td>
+                                                            <td style="text-align: center;width: 140px;">
+                                                                <p class="mb-0 text-rtl-left"><%= currency %><%= totalcharge %></p>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="px-0 py-1 text-left text-small" style="padding-left: 20px;">
+                                                                <p class="mb-0"> Tax Charges :
+                                                                </p>
+                                                            </td>
+                                                            <td style="text-align: center;">
+                                                                <p class="mb-0 text-rtl-left"><%= currency %><%= totalTax %></p>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="px-0 py-1 text-left text-small" style="padding-left: 20px;">
+                                                                <p class="mb-0">Other Charges :
+                                                                </p>
+                                                            </td>
+                                                            <td style="text-align: center;">
+                                                                <p class="mb-0 text-rtl-left"><%= currency %><%= totalOtherCharge %></p>
+                                                            </td>
+                                                        </tr>
+
+                                                        <% if(trip.promo_payment > 0){ %>
+                                                        <tr>
+                                                            <td class="px-0 py-1 text-left text-small" style="padding-left: 20px;">
+                                                                <p class="mb-0">Promo Bunus : </p>
+                                                            </td>
+                                                            <td style="text-align: center;">
+                                                                <p class="mb-0 text-rtl-left"><%= currency %><%= promo_payment %></p>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                        <tr>
+                                                            <td class="px-0 py-1 text-left text-small" style="padding-left: 20px;">
+                                                                <p class="mb-0 font-weight-bold">Total
+                                                                    : </p>
+                                                            </td>
+                                                            <td style="text-align: center;">
+                                                                <p class="mb-0 font-weight-bold text-rtl-left"><%= currency %><%= total %></p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table style="border-collapse: separate;width: 100%;margin-bottom: 16px" aria-hidden="true">
+                                    <thead class="border-bottom" style="background-color: #f3f3f3!important;">
+                                        <% if(userpayment>0){ %>
+                                        <tr class="px-0 border-bottom">
+                                            <th>
+                                                <p style="text-align: left;padding-left: 20px;" >Customer Payment</p>
+                                            </th>
+                                            <th style="text-align: center;width: 140px;">
+                                                <% if(userpayment>0){ %>
+                                                    <p class="mb-0 font-weight-bold text-rtl-left"><%= currency %><%= userpayment %></p>
+                                                <% } %>
+                                            </th>
+                                        </tr>
+                                        <% } %>
+                                    </thead>
+                                    <tbody class="">
+                                        <% if(trip.cash_payment > 0){ %>
+                                        <tr>
+                                            <td class="px-0 py-1">
+                                                <p class="mb-0" style="padding-left: 20px;">Cash</p>
+                                            </td>
+                                            <td class="px-0 py-1 text-right">
+                                                <p style="text-align: center;"><%= currency %> <%= +(trip.cash_payment).toFixed(2) %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(trip.card_payment>0){ %>
+                                        <tr>
+                                            <td class="px-0 py-1">
+                                                <p class="mb-0" style="padding-left: 20px;">Card</p>
+                                            </td>
+                                            <td class="px-0 py-1 text-right">
+                                                <p style="text-align: center;"><%= currency %>  <%= +(trip.card_payment).toFixed(2)%> </p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(trip.wallet_payment>0){ %>
+                                        <tr>
+                                            <td class="px-0 py-1">
+                                                <p class="mb-0" style="padding-left: 20px;">Wallet</p>
+                                            </td>
+                                            <td class="px-0 py-1 text-right">
+                                                <p style="text-align: center;"><%= currency %> <%= +(trip.wallet_payment).toFixed(2) %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(trip.remaining_payment>0){ %>
+                                        <tr>
+                                            <td class="px-0 py-1">
+                                                <p class="mb-0" style="padding-left: 20px;">Remaining Payment</p>
+                                            </td>
+                                            <td class="px-0 py-1 text-right">
+                                                <p style="text-align: center;"><%= currency %> <%= +(trip.remaining_payment).toFixed(2) %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                                <table  style="border-collapse: separate;width: 100%;margin-bottom: 16px" aria-hidden="true">
+                                    <% if(split_payment_users && split_payment_users.length>0){ %>
+                                    <thead class="border-bottom" style="background-color: #f3f3f3!important;">
+                                        <tr class="px-0 border-bottom">
+                                            <th style="text-align: left;padding-left: 16px; width: 220px;max-width: 100%;">
+                                                <p>Split Customer Payment</p>
+                                            </th>
+        
+                                            <th class="text-right pr-ltr-3" style="text-align: center;width: 140px;">
+                                                <p ><%= currency %><%= total_split_payment %></p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <% } %>
+                                    <tbody >
+                                        <% split_data.forEach(function(data){ %>
+                                            <% if(data.remaining_payment > 0){ %>
+                                            <tr>
+                                                <td class="px-0 py-1" style="padding-left: 20px;">
+                                                    <p class="mb-0">Remaining Payment</p>
+                                                </td>
+                                                <td class="px-0 py-1">
+                                                    <p class="mb-0" style="text-align: center;"><%= data.first_name%>  <%= data.last_name%>  (<%data.unique_id%>)</p>
+                                                </td>
+                                                <td class="px-0 py-1 text-right">
+                                                    <p style="text-align: center;"><%= currency %> <%= +(data.remaining_payment).toFixed(2) %> </p>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                        <% if(data.cash_payment > 0){ %>
+                                            <tr >
+                                                <td class="px-0 py-1" style="padding-left: 20px;">
+                                                    <p class="mb-0">Cash </p>
+                                                </td>
+                                                <td class="px-0" style="text-align: center;">
+                                                    <p class="mb-0"><%= data.first_name%>  <%= data.last_name%>  (<%= data.unique_id%>)</p>
+                                                </td>
+                                                <td class="px-0 py-1 text-right">
+                                                    <p style="text-align: center;"><%= currency %> <%= +(data.cash_payment).toFixed(2) %> 
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                        <% if(data.card_payment > 0){ %>
+                                            <tr >
+                                                <td class="px-0 py-1">
+                                                    <p class="mb-0" style="padding-left: 20px;">Card</p>
+                                                </td>
+                                                <td class="px-0">
+                                                    <p class="mb-0" style="text-align: center;"><%= data.first_name%>  <%= data.last_name%>  (<%= data.unique_id%>)</p>
+                                                </td>
+                                                <td class="px-0 py-1 text-right">
+                                                    <p style="text-align: center;"><%= currency %> <%= +(data.card_payment).toFixed(2)%> </p>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                        <% if(data.wallet_payment > 0){ %>
+                                            <tr>
+                                                <td class="px-0 py-1">
+                                                    <p class="mb-0" style="padding-left: 20px;">Wallet</p>
+                                                </td>
+                                                <td class="px-0">
+                                                    <p class="mb-0" style="text-align: center;"><%= data.first_name%>  <%= data.last_name%>  (<%= data.unique_id%>)</p>
+                                                </td>
+                                                <td class="px-0 py-1 text-right">
+                                                    <p style="text-align: center;"><%= currency %> <%= +(data.wallet_payment).toFixed(2)%>  </p>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                                <table style="border-collapse: separate;width: 100%;margin-bottom: 16px" aria-hidden="true">
+                                    <thead class="border-bottom" style="background-color: #f3f3f3!important;">
+                                        <tr class="px-0 border-bottom">
+                                            <th>
+                                                <p style="text-align: left;padding-left: 20px;">Driver Earning</p>
+                                            </th>
+                                            <th class="text-right pr-ltr-3" style="text-align: center;width: 140px;">
+                                                <p >
+                                                    <%= currency %><%= provider_service_fees %></p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="">
+                                        <tr>
+                                            <td class="px-0 py-1">
+                                                <p class="mb-0" style="padding-left: 20px;">Driver Profit</p>
+                                            </td>
+                                            <td class="px-0 py-1 text-right">
+                                                <p style="text-align: center;"><%= currency %><%= provider_profit_fees %></p>
+                                            </td>
+                                        </tr>
+                                        <% if(trip.tip_amount!=0){ %>
+                                        <tr>
+                                            <td class="px-0 py-1">
+                                                <p class="mb-0"  style="padding-left: 20px;" >Tip</p>
+                                            </td>
+                                            <td class="px-0 py-1 text-right">
+                                                <p style="text-align: center;"><%= currency %><%= tip_amount %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(trip.toll_amount!=0){ %>
+                                        <tr>
+                                            <td class="px-0 py-1">
+                                                <p class="mb-0"  style="padding-left: 20px;">Toll</p>
+                                            </td>
+                                            <td class="px-0 py-1 text-right">
+                                                <p style="text-align: center;"><%= currency %><%= toll_amount %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(trip.provider_tax_fee!=0){ %>
+                                        <tr>
+                                            <td class="px-0 py-1">
+                                                <p class="mb-0"  style="padding-left: 20px;">Driver tax</p>
+                                            </td>
+                                            <td class="px-0 py-1 text-right">
+                                                <p style="text-align: center;"><%= currency %><%= provider_tax_fee %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                        <% if(trip.provider_miscellaneous_fee!=0){ %>
+                                        <tr>
+                                            <td class="px-0 py-1">
+                                                <p class="mb-0"  style="padding-left: 20px;">Driver Miscellaneous Fee</p>
+                                            </td>
+                                            <td class="px-0 py-1 text-right">
+                                                <p style="text-align: center;"><%= currency %><%= provider_miscellaneous_fee %></p>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

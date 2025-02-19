@@ -1,0 +1,14 @@
+/node_modules
+package-lock.json
+/.accounts/
+/.wwebjs_cache/
+
+
+log_files/*
+config/data/*
+app/models/*
+!app/models/admin_settings.js
+
+# exception to the rule
+!config/data/.gitkeep
+.scannerwork/*

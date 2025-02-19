@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        /* Add your CSS styles here */
+        /* Example:
+        .logo {
+            float: left;
+            width: 50px;
+            padding: 0;
+            margin-bottom: 12px;
+        }
+        */
+    </style>
+</head>
+<body>
+    <header>
+        <div style="margin: 0 auto; width: 90%; padding: 15px; background-color: #FFFFFF; color: #000000;">
+            <!-- Logo and date -->
+            <div>
+                <div class="logo">
+                    <img alt="logo" src="<%= mail_title_image_url %>" style="width: 50px;">
+                </div>
+                <div style="float: right; padding: 15px 0px 0px 0px;">
+                    <%= date %>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+
+            <!-- Content Section -->
+            <div>
+                <!-- Table -->
+                <div style="width: 100%; overflow: hidden;">
+                    <table style="width: 100%; border-collapse: collapse;" aria-hidden="true">
+                        <thead>
+                            <tr style="background-color: #f3f3f3; border-bottom: 2px solid #c3c3c3; color: #000000;">
+                                <th>Trip ID</th>
+                                <th>Profit Type</th>
+                                <th>Profit Value</th>
+                                <th>Profit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% profits.forEach(function(data){ %>
+                            <tr>
+                                <td><%= data.trip_unique_id %></td>
+                                <td>
+                                    <% if(data.profit_type == "1") { %>
+                                        Absolute
+                                    <% } else if(data.profit_type == "2"){ %>
+                                        Percentage
+                                    <% } %>
+                                </td>
+                                <td><%= data.profit_value %></td>
+                                <td><%= data.profit %></td>
+                            </tr>
+                            <% }); %> 
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Additional content or sections -->
+                <div style="width: 50%; float: right;">
+                    <!-- Additional content -->
+                </div>
+
+                <div style="clear: both;"></div>
+            </div>
+
+            <!-- Footer Section -->
+            <div style="padding: 15px 0px 0px 0px; color: #000000; background-color: #FFFFFF;">
+                <div style="margin: 15px 25px 15px 0; width: 50px; width: 48%; float: left; border-right: 1px solid rgba(255,255,255,.2);">
+                    <img style="float: left;" height="45" width="45" alt="user_img" src="https://lh6.googleusercontent.com/3Hn74JQ-hjKXIFGivc6jL5hKf7WVydnBHYNPhaYdJJI=s512-no">
+                    <p style="float: right; margin: 5px 0 0 5px; padding: 0px; width: 81%;">
+                        <span style="color: #000000; font-size: 12px; font-weight: bold;"><%= title %>, Support</span>
+                        <br>
+                        <span style="font-size: 12px;"><a href="{{ web_url() }}" style="color: #000000;">Contact us</a> with questions about your trip.<br></span>
+                    </p>
+                    <div style="clear: both;"></div>
+                </div>
+                <div style="margin: 15px 0px; border-radius: 150px; width: 47%; float: left;">
+                    <img style="float: left;" height="45" width="45" alt="user img" src="https://lh3.googleusercontent.com/-Kz8To9O9BD4/VQK6ZB9YEmI/AAAAAAAABuA/SsmgdIT9UHs/s512-no/gift-icon-0926005203.png">
+                    <p style="float: right; margin: 5px 0 0 5px; padding: 0px; width: 81%; font-size: 12px; font-weight: bold;"></p>
+                    <div style="padding: 2px; float:right; color:#000000; position: relative; margin-top: -15px;">
+                        <a href="#" style="border: 0px; text-decoration: none;"><img src="https://lh6.googleusercontent.com/-N24iGXCS1B0/VQK6ZxCvrfI/AAAAAAAABuU/HoVX671-mOs/s100-no/social-facebook.png" height="25px" alt="alert_img"></a>
+                        <a href="#" style="border: 0px; text-decoration: none;"><img src="https://lh4.googleusercontent.com/-y8piQto1dWw/VQK6aItATiI/AAAAAAAABuY/4pVa-sGn3qk/s100-no/social-twitter.png" height="25px" alt="alert_img"></a>
+                        <a href="#" style="border: 0px; text-decoration: none;"><img src="https://lh4.googleusercontent.com/-C1g1EvHxUzs/VQK6ZKokMLI/AAAAAAAABuQ/aqfjBHrW6pU/s100-no/ios7-email.png" height="25px" alt="alert_img"></a>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+                <div style="clear: both;"></div>
+                <p style="text-align: center; font-size: 12px; margin-top: 30px;">For inquiries: </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Scripts at the bottom -->
+    <script>
+        // Move your inline JavaScript logic here or link external scripts
+    </script>
+</body>
+</html>

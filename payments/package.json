@@ -1,0 +1,45 @@
+{
+  "name": "EBER_payments",
+  "version": "1.0.0",
+  "description": "EBER",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod" :"NODE_ENV=production node server.js",
+    "dev" : "nodemon server.js"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "MEAN",
+    "MVC"
+  ],
+  "author": "Elluminati Inc",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "fs": "0.0.1-security",
+  "homepage": "test page",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "body-parser": "^1.15.2",
+    "cluster": "^0.7.7",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "express": "^4.10.7",
+    "moment": "^2.16.0",
+    "moment-timezone": "^0.5.14",
+    "mongoose": "^6.0.12",
+    "mongoose-id-autoincrement": "^1.0.4",
+    "mongoose-pages": "0.0.3",
+    "mongoose-paginate": "^5.0.3",
+    "paytabs_pt2": "^2.0.8",
+    "razorpay": "^2.9.1",
+    "request": "^2.88.2",
+    "stripe": "^8.25.0",
+    "tunnel-ssh": "^4.1.4",
+    "socket.io": "^4.4.1"
+  }
+}

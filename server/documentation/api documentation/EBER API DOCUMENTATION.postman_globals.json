@@ -1,0 +1,89 @@
+{
+	"id": "c67b5cc9-99fa-48e4-8954-e09aa9d4513a",
+	"values": [
+		{
+			"key": "USER_UNIQUE_NUMBER",
+			"value": "10",
+			"enabled": true
+		},
+		{
+			"key": "PROVIDER_UNIQUE_NUMBER",
+			"value": "11",
+			"enabled": true
+		},
+		{
+			"key": "CORPORATE_UNIQUE_NUMBER",
+			"value": "5",
+			"enabled": true
+		},
+		{
+			"key": "PARTNER_UNIQUE_NUMBER",
+			"value": "4",
+			"enabled": true
+		},
+		{
+			"key": "PAYMENT_GATEWAY_STRIPE",
+			"value": "10",
+			"enabled": true
+		},
+		{
+			"key": "PAYMENT_GATEWAY_PAYSTACK",
+			"value": "11",
+			"enabled": true
+		},
+		{
+			"key": "PAYMENT_GATEWAY_PAYU",
+			"value": "12",
+			"enabled": true
+		},
+		{
+			"key": "TRIP_TYPE_NORMAL",
+			"value": "0",
+			"enabled": true
+		},
+		{
+			"key": "TRIP_TYPE_VISITOR",
+			"value": "1",
+			"enabled": true
+		},
+		{
+			"key": "TRIP_TYPE_HOTEL",
+			"value": "2",
+			"enabled": true
+		},
+		{
+			"key": "TRIP_TYPE_DISPATCHER",
+			"value": "3",
+			"enabled": true
+		},
+		{
+			"key": "TRIP_TYPE_PROVIDER",
+			"value": "6",
+			"enabled": true
+		},
+		{
+			"key": "TRIP_TYPE_CORPORATE",
+			"value": "7",
+			"enabled": true
+		},
+		{
+			"key": "TRIP_STATUS_COMING",
+			"value": "2",
+			"enabled": true
+		},
+		{
+			"key": "TRIP_STATUS_ARRIVED",
+			"value": "4",
+			"enabled": true
+		},
+		{
+			"key": "TRIP_STATUS_TRIP_STARTED",
+			"value": "6",
+			"enabled": true
+		}
+	],
+	"name": "EBER API DOCUMENTATION Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2021-11-25T14:37:03.086Z",
+	"_postman_exported_using": "Postman/7.36.5"
+}

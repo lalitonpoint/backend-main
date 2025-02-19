@@ -1,0 +1,131 @@
+stages:
+  - sonarqube-check
+  - deploy_server
+  - deploy
+   
+sonarqube-check: 
+  stage: sonarqube-check
+  tags: 
+    - old-runner 
+  image:  
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""] 
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  cache: 
+    key: "${CI_JOB_NAME}" 
+    paths: 
+      - .sonar/cache  
+  script: 
+    - sudo /root/sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner 
+  allow_failure: true 
+  after_script:
+    - sudo rm -rf /home/gitlab-runner/builds/GiJ3Zv1x/0/eber-product/web/backend/.scannerwork
+  only:
+    - development 
+
+.deploy_function: &deploy_function
+  script:
+    # - sudo apt update -qy
+    # - sudo apt install -y rsync 
+    - mkdir -p ~/.ssh
+ 
+    - |
+      if [ "$CI_COMMIT_REF_NAME" = "master" ]; then
+        SSH_PRIVATE_KEY="$MASTER_SSH_PRIVATE_KEY"
+        USER_NAME=$MASTER_USER_NAME
+        IP_ADDRESS=$MASTER_IP_ADDRESS
+      elif [ "$CI_COMMIT_REF_NAME" = "development" ]; then
+        SSH_PRIVATE_KEY="$DEV_SSH_PRIVATE_KEY"
+        USER_NAME=$DEV_USER_NAME
+        IP_ADDRESS=$DEV_IP_ADDRESS
+      fi
+ 
+    - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
+    - sudo chmod 600 ~/.ssh/id_rsa
+    - eval $(ssh-agent -s)
+    - ssh-add ~/.ssh/id_rsa
+    - ssh -o StrictHostKeyChecking=no $USER_NAME@$IP_ADDRESS "mkdir -p $PROJECT_PATH"
+    - rsync -e "ssh -o StrictHostKeyChecking=no" -r ./ $USER_NAME@$IP_ADDRESS:$PROJECT_PATH
+    - ssh -o StrictHostKeyChecking=no -t $USER_NAME@$IP_ADDRESS "cd $PROJECT_PATH && npm i && npm install pm2 -g && pm2 restart server.js"
+    
+deploy-history-earning:
+  stage: deploy
+  tags:
+    - old-runner
+  before_script:
+  - cd history-earning
+  <<: *deploy_function
+  variables:
+    PROJECT_PATH: $CICD_DIRECTORY_HE
+  only:
+    refs:
+      - development
+      - master
+    # changes:
+    #   - "history-earning/**/*"
+ 
+deploy-whatsapp-messenger:
+  stage: deploy
+  tags:
+    - old-runner
+  before_script:
+  - cd whatspp_messenger
+  <<: *deploy_function
+  variables:
+    PROJECT_PATH: $CICD_DIRECTORY_WP
+  only:
+    refs:
+      - development
+      - master
+    # changes:
+    #   - "whatspp_messenger/**/*"
+ 
+deploy-server:
+  stage: deploy_server
+  tags:
+    - old-runner
+  before_script:
+  - cd server
+  <<: *deploy_function
+  variables:
+    PROJECT_PATH: $CICD_DIRECTORY_S
+  only:
+    refs:
+      - development
+      - master
+    # changes:
+    #   - "server/**/*"
+ 
+deploy-payments:
+  stage: deploy
+  tags:
+    - old-runner
+  before_script:
+  - cd payments    
+  <<: *deploy_function
+  variables:
+    PROJECT_PATH: $CICD_DIRECTORY_P
+  only:
+    refs:
+      - development
+      - master
+    # changes:
+    #   - "payments/**/*"
+ 
+deploy-mass-notification:
+  stage: deploy
+  before_script:
+  - cd mass_notification
+  tags:
+    - old-runner
+  <<: *deploy_function
+  variables:
+    PROJECT_PATH: $CICD_DIRECTORY_MN
+  only:
+    refs:
+      - development
+      - master
+    # changes:
+    #   - "mass_notification/**/*"

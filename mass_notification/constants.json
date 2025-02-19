@@ -1,0 +1,8 @@
+{
+	"PUSH_CERTIFICATE_PATH" : "app/ios_push",
+	"IOS_CERT_FILE_NAME": "push_file.p8",
+    "PUSH_DEVICE_TYPE_ANDROID" : "android",
+	"PUSH_DEVICE_TYPE_IOS" : "ios",
+	"USER_UNIQUE_NUMBER" : "10",
+	"PROVIDER_UNIQUE_NUMBER" : "11"
+}
