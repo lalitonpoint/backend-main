@@ -1,0 +1,433 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title><%= config_json.email_title_provider_invoice %></title>
+  <style>
+    .font-weight-bold {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body style="background-color: #F1F1F1;margin:0;padding: 0;font-family: sans-serif;">
+  <div class="head-wrap" style="background-color: #0492A4;">
+    <img style="width: 100%;" src="<%= mail_title_image_url %>" alt="logo"></img>
+  </div>
+  <table style="background-color: #000c18;width: 100%;" aria-hidden="true">
+    <tr>
+      <td style="padding: 0;text-align: center;padding-top: 10px;padding-bottom: 10px;color: #FFFFFF;">
+        <div style="text-align: left;width: 100%;max-width: 300px;display: inline-block;vertical-align: top;font-size: 1.5em;">
+          <%= currency %> <%= total.toFixed(2) %>
+        </div>
+        <div style="text-align: right;width: 100%;color: #FFFFFF;max-width: 300px;display: inline-block;vertical-align: top;font-size: .8em;margin-top:.8em;">
+          <%= config_json.email_title_main %> <%= title %>, <%= provider_name %>!
+        </div>
+      </td>
+    </tr>
+  </table>
+  <table style="width: 100%;" aria-hidden="true">
+    <tr>
+      <td style="padding: 0;text-align: center;padding-top: 10px;padding-bottom: 0px;">
+        <div style="text-align: left;width: 100%;max-width: 300px;display: inline-block;vertical-align: top;font-size: 1.5em;">
+          <table style="border-spacing: 0;font-family: sans-serif;color: #333333;" aria-hidden="true">
+            <tbody>
+              <tr>
+                <td style="padding: 10px;">
+                  <table style="border-spacing: 0;font-family: sans-serif;color: #333333;width: 100%;font-size: 14px;text-align: left;" aria-hidden="true">
+                    <tbody>
+                      <tr>
+                        <td style="padding: 0px 0px 10px 0px;">
+                          <span style="float: none;display: block;text-align: left;"><%= config_json.email_title_location %></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0px; background-color: #FFFFFF; border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px; overflow: hidden;">
+                          <span style="margin-top: 5px;float: none;display: block;text-align: left;">
+                            <img style="width: 100%;" src="<%= map_url %>" alt=""></img>
+                          </span>
+                          <span style="float: none;display: block;text-align: left;">
+                            <p style="float: left; width: 25%;text-align: center;margin-top: 2.1em;">
+                              <img style="width: 100%;" src="" alt=""></img>
+                              <span style="position: relative;top: -12px;"><%= service_type_name %></span>
+                            </p>
+                            <p style="float: right;width: 75%;margin: 10px 0px 0px 0px;">
+                              <span style="float: left;width: 12%;">
+                                <img style="width: 20px;margin: 5px;" src="<%= pickup_small_pin_url %>" alt="FROM"></img>
+                              </span>
+                              <span style="float: right;width: 85%;">
+                                <strong style="font-size: 11px"><%= config_json.email_title_from %></strong>
+                                <br>
+                                <span style="color: #919191;font-size: 11px;"><%= source_address %></span>
+                              </span>
+                            </p>
+                            <% actual_destination_addresses.forEach((destination_address) => { %>
+                              <% if(destination_address.address != ''){ %>
+                                <p style="float: right;width: 75%;margin:5px 0px;">
+                                  <span style="float: left;width: 12%;">
+                                    <img style="width: 20px;margin: 5px;" src="<%= stop_small_pin_url %>" alt="TO"></img>
+                                  </span>
+                                  <span style="float: right;width: 85%;">
+                                    <strong style="font-size: 11px"><%= config_json.email_title_to %></strong>
+                                    <br>
+                                    <span style="color: #919191;font-size: 11px;"><%= destination_address.address %></span>
+                                  </span>
+                                </p>
+                              <% } %>
+                            <% }) %>
+                            <p style="float: right;width: 75%;margin:5px 0px;">
+                              <span style="float: left;width: 12%;">
+                                <img style="width: 20px;margin: 5px;" src="<%= desination_small_pin_url %>" alt="TO"></img>
+                              </span>
+                              <span style="float: right;width: 85%;">
+                                <strong style="font-size: 11px"><%= config_json.email_title_to %></strong>
+                                <br>
+                                <span style="color: #919191;font-size: 11px;"><%= destination_address %></span>
+                              </span>
+                            </p>
+                            <p style="clear: both;margin-bottom: 10px;"></p>
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 10px 0px;">
+                          <span style="float: none;display: block;text-align: left;"><%= config_json.email_title_trip_statistics %></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0px;background-color: #FFFFFF; border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px; overflow: hidden;">
+                          <span style="float: none;display: block;text-align: left;">
+                            <p style="float: left; width: 50%;text-align: center !important;">
+                              <span style="float: left;width: 50%;">
+                                <img style="width: 40px;margin: 5px;" src="<%= hour_icon %>" alt="FROM"></img>
+                              </span>
+                              <span style="float: left;width: 50%;margin-top: 18px;">
+                                <span><%= total_time %> <%= config_json.email_title_min %></span>
+                              </span>
+                            </p>
+                            <p style="float: right;width: 50%;">
+                              <span style="float: left;width: 50%;">
+                                <img style="width: 40px;margin: 5px;" src="<%= km_icon %>" alt="TO"></img>
+                              </span>
+                              <span style="float: left;width: 50%;margin-top: 18px;">
+                                <span><%= total_distance %> <%= distance_unit %></span>
+                              </span>
+                            </p>
+                            <p style="clear: both;margin-bottom: 10px;"></p>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="text-align: left;width: 100%;max-width: 300px;display: inline-block;vertical-align: top;font-size: 1.5em;">
+          <table style="width: 100%;border-spacing: 0;font-family: sans-serif;color: #333333;" aria-hidden="true">
+            <tbody>
+              <tr>
+                <td style="padding: 10px;">
+                  <table style="border-spacing: 0;font-family: sans-serif;color: #333333;width: 100%;font-size: 14px;text-align: left;" aria-hidden="true">
+                    <tbody>
+                      <tr>
+                        <td style="padding: 0px 0px 10px 0px;">
+                          <span style="float: none;display: block;text-align: left;"><%= config_json.email_title_fare_breakdown %></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0px; background-color: #FFFFFF; border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px; overflow: hidden;">
+                          <span style="margin-top: 5px;float: none;display: block;text-align: left;">
+                            <% if(detail.base_distance_cost > 0){ %>
+                            <p style="padding: 0.5em 0.8em 0.0em 0.8em;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_base_price %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.base_distance_cost.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.distance_cost > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;">
+                                <%= config_json.title_distance_price %><br>
+                                <span style="font-size: 10px"><%= currency %><%= price_per_unit_distance %> <%= distance_unit %></span>
+                              </span>
+                              <span style="margin: 1.25em 0em;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.distance_cost.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.time_cost > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;">
+                                <%= config_json.title_total_time_price %><br>
+                                <span style="font-size: 10px"><%= currency %><%= price_for_total_time %> <%= config_json.email_title_per_min %></span>
+                              </span>
+                              <span style="margin: 1.25em 0em;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.time_cost.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.waiting_time_cost > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;">
+                                <%= config_json.title_wait_time_price %><br>
+                                <span style="font-size: 10px"><%= currency %><%= price_for_waiting_time %> <%= config_json.email_title_per_min %></span>
+                              </span>
+                              <span style="margin: 1.25em 0em;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.waiting_time_cost.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+                            
+                            <% if(detail.stop_waiting_time_cost > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;">
+                                <%= config_json.title_stop_wait_time_price %><br>
+                                <span style="font-size: 10px"><%= currency %><%= price_for_waiting_time_multiple_stops %> <%= config_json.email_title_per_min %></span>
+                              </span>
+                              <span style="margin: 1.25em 0em;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.stop_waiting_time_cost.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.surge_fee > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_surge_price %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.surge_fee.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.total_after_surge_fees > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;" class="font-weight-bold">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_service_price %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.total_after_surge_fees.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.tax_fee > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_tax %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.tax_fee.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.total_after_tax_fees > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;" class="font-weight-bold">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_total_service_price %>
+                                <% if(detail.trip_type == constant_json.TRIP_TYPE_AIRPORT){ %>
+                                <%= config_json.title_airport_price_applied %>
+                                <% }else if(detail.trip_type == constant_json.TRIP_TYPE_ZONE){ %>
+                                <%= config_json.title_zone_to_zone_price_applied %>
+                                <% }else if(detail.trip_type == constant_json.TRIP_TYPE_CITY){ %>
+                                <%= config_json.title_city_to_city_price_applied %>
+                                <% }else if(detail.is_fixed_fare == 1){ %>
+                                <%= config_json.title_fixed_price_applied %>
+                                <% }else if(detail.is_min_fare_used == 1){ %>
+                                <%= config_json.title_min_fare_applied %>
+                                <% } %>
+                              </span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.total_after_tax_fees.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.user_tax_fee > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_user_tax %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.user_tax_fee.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.user_miscellaneous_fee > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_user_miscellaneous_fee %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.user_miscellaneous_fee.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.total_after_user_tax_fees > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;" class="font-weight-bold">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_sub_total %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.total_after_user_tax_fees.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.tip_amount > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_is_trip %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.tip_amount.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.toll_amount > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_is_toll %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.toll_amount.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.promo_payment > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_promo_bonus %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.promo_payment.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;" class="font-weight-bold">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_total %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.total.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+
+
+                            <% if(detail.provider_profit_fees > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_provider_profit %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.provider_profit_fees.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.provider_tax_fee > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_provider_tax %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.provider_tax_fee.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <% if(detail.provider_miscellaneous_fee > 0){ %>
+                            <p style="padding: 0.0em 0.8em; border-bottom: 1px solid #f4f4f4;">
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;"><%= config_json.title_provider_miscellaneous_fee %></span>
+                              <span style="padding: 0.7em 0px;width: 50%;display: block;float: left;text-align: right;"><%= currency %><%= detail.provider_miscellaneous_fee.toFixed(2) %></span>
+                            </p>
+                            <p style="clear: both;"></p>
+                            <% } %>
+
+                            <p style="padding: 1em 0.8em 0em 0.8em;color: #9f9f9f;text-align: center;margin: 25px 5px 5px 5px;" class="font-weight-bold"><%= config_json.title_total_provider_earning %></p>
+                            <p style="color: #616161;text-align: center;font-size: 2em;line-height: 1;margin: 0px 0px 40px 0px;" class="font-weight-bold"><%= currency %><%= detail.provider_service_fees.toFixed(2) %></p>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <table style="width: 100%;" aria-hidden="true">
+    <tr>
+      <td style="padding: 0;text-align: center;padding-top: 0px;padding-bottom: 10px;">
+        <div style="text-align: left;width: 100%;max-width: 300px;display: inline-block;vertical-align: top;font-size: 1.5em;">
+          <table style="border-spacing: 0;font-family: sans-serif;color: #333333;width: 100%;" aria-hidden="true">
+            <tbody>
+              <tr>
+                <td style="padding: 0px 10px;">
+                  <table style="border-spacing: 0;font-family: sans-serif;color: #333333;width: 100%;font-size: 14px;text-align: left;" aria-hidden="true">
+                    <tbody>
+                      <tr>
+                        <td style="padding: 10px 0px;">
+                          <span style="float: none;display: block;text-align: left;"><%= config_json.email_title_payment %></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0px;background-color: #FFFFFF; border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px; overflow: hidden;">
+                          <span style="float: none;display: block;text-align: left;">
+                            <p style="float: left;width: 100%;">
+                              <span style="float: left;width: 25%;">
+                                <img style="width: 40px;margin: 5px 10px;" src="<%= credit_card %>" alt="FROM"></img>
+                              </span>
+                              <span style="float: left;width: 40%;margin-top: 12px;">
+                                <span><%= config_json.email_title_credit_card %></span>
+                              </span>
+                              <span style="float: left;width: 33%;text-align: right;margin-top: 12px;">
+                                <span><%= currency %><%= card_payment %></span>
+                              </span>
+                            </p>
+                            <p style="clear: both;margin-bottom: 10px;"></p>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="text-align: left;width: 100%;max-width: 300px;display: inline-block;vertical-align: top;font-size: 1.5em;">
+          <table style="width: 100%;border-spacing: 0;font-family: sans-serif;color: #333333;" aria-hidden="true">
+            <tbody>
+              <tr>
+                <td style="padding: 0px 10px;">
+                  <table style="border-spacing: 0;font-family: sans-serif;color: #333333;width: 100%;font-size: 14px;text-align: left;" aria-hidden="true">
+                    <tbody>
+                      <tr>
+                        <td style="padding: 10px 0px;">
+                          <span style="float: none;display: block;text-align: left;"><%= config_json.email_title_user_detail %></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 0px;background-color: #FFFFFF; border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px; overflow: hidden;">
+                          <span style="float: none;display: block;text-align: left;">
+                            <p style="float: left;width: 100%;">
+                              <span style="float: left;width: 20%;">
+                                <img style="width: 40px;margin: 0px 10px;border-radius: 150px;border: 2px solid #f1f1f1" src="<%= provider_picture %>" alt=""></img>
+                              </span>
+                              <span style="float: right;width: 78%;">
+
+                                <span style="font-size: 12px;color: #616161">
+                                  <strong><%= config_json.email_title_name %></strong> : <%= provider_name %>
+
+                                </span>
+                              </span>
+                            </p>
+                            <p style="clear: both;margin-bottom: 10px;"></p>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <table style="width: 100%;" aria-hidden="true">
+    <tr>
+      <td style="padding: 0;text-align: center;padding-bottom: 10px;">
+        <div style="width: 100%;text-align: center;">
+          <img style="width: 3em;" src="<%= support %>" alt="logo"></img>
+          <div>
+            <p style="color: #038291;font-size: 1.2em; margin: 0px;"><%= title %> <%= config_json.email_title_support %></p>
+            <p style="margin: 10px;">
+              <a style="text-decoration: underline;color:#000000;" href="<%= support_email %>"><%= config_json.email_title_contact_us %></a> <%= config_json.email_title_other_info %>
+              <br>
+            </p>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>

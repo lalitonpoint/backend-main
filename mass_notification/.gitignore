@@ -1,0 +1,13 @@
+/node_modules/
+/node_modules
+package-lock.json
+
+log_files/*
+config/data/*
+app/models/*
+!app/models/admin_settings.js
+
+# exception to the rule
+!log_files/.gitkeep
+!config/data/.gitkeep
+.scannerwork/*
