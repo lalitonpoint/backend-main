@@ -6,7 +6,7 @@ package-lock.json
 log_files/*
 app/ios_push/*
 config/data/*
-config/env/*
+#config/env/*
 data/partner_document/*
 data/partner_profile/*
 data/provider_document/*
