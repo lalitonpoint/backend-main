@@ -7,7 +7,7 @@ const {
 // middleware auth function 
 async function middlewares(req, res, next) {
 
-    if (req.path != '/login' && req.path != '/forgot_password' && req.path != '/register' && req.path != '/update_password' && req.path != '/get_language_list' && req.path != '/get_mongoose_models' && req.path != '/add_new_admin_details' && req.path != '/add_string' && req.path != '/get_guest_token'  && req.path != '/get_admin_setting_detail'  && req.path != '/check_subscription' && req.path != '/create_subscription_session' && req.path != '/subscription_webhook')  {
+    if (req.path != '/login' && req.path != '/forgot_password' && req.path != '/register' && req.path != '/update_password' && req.path != '/get_language_list' && req.path != '/get_mongoose_models' && req.path != '/add_new_admin_details' && req.path != '/add_string' && req.path != '/get_guest_token'  && req.path != '/get_admin_setting_detail'  && req.path != '/check_subscription' && req.path != '/create_subscription_session' && req.path != '/subscription_webhook' && req.path != '/get_country_city_list')  {
         let type = req.headers.type
         let id = req.headers.admin_id
         let token = req.headers.token
