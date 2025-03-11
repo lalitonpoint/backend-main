@@ -17,11 +17,11 @@
 	
 	"authorised_signature_image_url" : "web_images/authorised_image.png",
 	
-	"app_name" : "WOW",
-	"partner_panel_name" : "WOW PARTNER PANEL",
-	"dispatcher_panel_name" : "WOW DISPATCHER PANEL",
-	"corporate_panel_name" : "WOW CORPORATE PANEL",
-	"hotel_panel_name" : "WOW HOTEL PANEL",
+	"app_name" : "OnPoint",
+	"partner_panel_name" : "OnPoint PARTNER PANEL",
+	"dispatcher_panel_name" : "OnPoint DISPATCHER PANEL",
+	"corporate_panel_name" : "OnPoint CORPORATE PANEL",
+	"hotel_panel_name" : "OnPoint HOTEL PANEL",
 	
 	"ZERO" : "0",
 	"YES" : "1",

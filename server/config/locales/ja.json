@@ -927,7 +927,7 @@
 	"tooltip_default_payment_gateway": "Stripeはデフォルトの支払いゲートウェイです。Stripeは顧客からの支払いを処理し,管理者に配信します。",
 	"tooltip_stripe_secret_key": "Stripeアカウントを識別するために,シークレットキーと公開可能キーが使用されます。アカウント>> APIキーでアカウントのテストおよびライブAPIキーを取得できます。公開可能キーは,クレジットカードトークンの生成に使用されます。 HTMLフォームに含まれています。 ",
 	"tooltip_stripe_publishable_key": "Stripeアカウントを識別するために,秘密の公開可能なキーが使用されます。[アカウント] >> [APIキー]で,アカウントのテストおよびライブAPIキーを取得できます。公開可能なキーはクレジットカードトークンの生成に使用され, HTMLフォームに含まれています。 ",
-	"tooltip_email_display_name": "サーバーから送信された電子メールの差出人名。 Wowサーバーの例",
+	"tooltip_email_display_name": "サーバーから送信された電子メールの差出人名。 OnPointサーバーの例",
 	"tooltip_email_domain_email_address": "メールの送信に使用されるドメインのメールアドレスから。例:noreply@elluminatiinc.com",
 	"tooltip_android_user_app_gcm_key": "GCMキーはユーザーアプリのプッシュ通知に使用されます。",
 	"tooltip_android_provider_app_gcm_key": "GCMキーはプロバイダーアプリのプッシュ通知に使用されます。",

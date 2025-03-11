@@ -708,8 +708,8 @@
 		
 		"title_user_login" : "User Login",
 		"title_provider_login" : "Provider Login",
-		"user_panel_name" : "Wow User",
-		"provider_panel_name" : "Wow Provider",
+		"user_panel_name" : "OnPoint User",
+		"provider_panel_name" : "OnPoint Provider",
 		"title_old_password" : "Old Password",
 		"title_confirm_password" : "Confirm Password",
 		"menu_title_history" : "History",

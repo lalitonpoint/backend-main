@@ -103,7 +103,7 @@ module.exports = function () {
     require('../app/routes/open_rides')(app);
     require('../app/routes/demo')(app);
 
-    // new wow version
+    // new OnPoint version
     app.use('',require('../app/index'))
 
     // if path not found then show 404 error

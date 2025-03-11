@@ -1,5 +1,5 @@
 
 module.exports = {
-    db: "mongodb+srv://WOW:g0pzgGsHDx9VXOAO@cluster0.ii2uy.mongodb.net/WOW_TAXI", //wowlive
-    // db: "", //wowdev
+    db: "mongodb+srv://onpointlogistics688:kxmzpPeY29bJDF84@cluster0.mcl2w.mongodb.net/OnPoint", //OnPointlive
+    // db: "", //OnPointdev
 };

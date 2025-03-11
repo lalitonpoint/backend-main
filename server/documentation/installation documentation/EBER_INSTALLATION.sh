@@ -1,6 +1,6 @@
 #!/bin/bash
 SLEEP_TIMES=1
-PRODUCT_NAME="Wow"
+PRODUCT_NAME="OnPoint"
 
 # Supported Ubuntu versions
 SUPPORTED_UBUNTU_VERSIONS=("16.04" "18.04" "20.04" "22.04")

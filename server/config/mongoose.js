@@ -30,7 +30,7 @@ module.exports = function () {
         let keyconfig = {
             "username": username, // vultr
             "password": password , // dev
-            "host": host, // wowdev
+            "host": host, // OnPointdev
             "port": 22,
             "dstHost": "127.0.0.1",
             "dstPort": 27017,
@@ -41,8 +41,8 @@ module.exports = function () {
         const tunnel = require('tunnel-ssh');
         // let server = tunnel({ ...keyconfig, privateKey: fs.readFileSync(keyconfig.keyPath) }, function (error, server) {
         let server = tunnel({ ...keyconfig }, function (error, server) {
-            db = mongoose.connect('mongodb://localhost:27000/NEW_EBER_LOCAL_CLEAN_DB', {}) // wowdev CLEAN DB 
-            // db = mongoose.connect('mongodb://localhost:27000/EBER', {}) // wowlive DB 
+            db = mongoose.connect('mongodb://localhost:27000/NEW_EBER_LOCAL_CLEAN_DB', {}) // OnPointdev CLEAN DB 
+            // db = mongoose.connect('mongodb://localhost:27000/EBER', {}) // OnPointlive DB 
         });
 
         server.on('error', function(err){

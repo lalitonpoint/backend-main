@@ -98,7 +98,7 @@ module.exports = mongoose.model('Settings', new Schema({
     google_map_lic_key: {type: String, default: ""},
     is_google_map_lic_key_expired: {type: Number, default: 0},
     server_url: {type: String, default: ""},
-    app_name: {type: String, default: "WOW"},
+    app_name: {type: String, default: "OnPoint"},
     partner_panel_name: {type: String, default: "Partner Panel"},
     dispatcher_panel_name: {type: String, default: "Dispatcher Panel"},
     hotel_panel_name: {type: String, default: "Hotel Panel"},

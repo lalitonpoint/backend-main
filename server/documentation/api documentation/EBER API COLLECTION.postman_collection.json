@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "3a570199-088b-4260-a9a6-915fe18cda28",
-		"name": "WOW API COLLECTION",
+		"name": "OnPoint API COLLECTION",
 		"description": "We are using some constant number for identity, which you can see below\n\n### **1.** **Constant For User**\n\nUSER_UNIQUE_NUMBER = 10\n\nPROVIDER_UNIQUE_NUMBER = 11\n\nCORPORATE_UNIQUE_NUMBER = 5\n\nPARTNER_UNIQUE_NUMBER = 4\n\n### **2\\. Constant For Payment Gateway**\n\nPAYMENT_GATEWAY_STRIPE = 10\n\nPAYMENT_GATEWAY_PAYSTACK = 11\n\nPAYMENT_GATEWAY_PAYU = 12\n\n### **3\\. Constant For Trip Type**\n\nTRIP_TYPE_NORMAL = 0\n\nTRIP_TYPE_VISITOR = 1\n\nTRIP_TYPE_HOTEL = 2\n\nTRIP_TYPE_DISPATCHER = 3\n\nTRIP_TYPE_PROVIDER = 6\n\nTRIP_TYPE_CORPORATE = 7\n\n### **4\\. Constant For Trip Status**\n\nTRIP_STATUS_COMING = 2\n\nTRIP_STATUS_ARRIVED = 4\n\nTRIP_STATUS_TRIP_STARTED = 6",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20385138"
@@ -40352,7 +40352,7 @@
 			"description": "Common API"
 		},
 		{
-			"name": "Wow Admin",
+			"name": "OnPoint Admin",
 			"item": [
 				{
 					"name": "Admin",
@@ -44385,7 +44385,7 @@
 			]
 		},
 		{
-			"name": "Wow Hub Panel",
+			"name": "OnPoint Hub Panel",
 			"item": [
 				{
 					"name": "Login",
@@ -44567,7 +44567,7 @@
 			]
 		},
 		{
-			"name": "Wow Corporate",
+			"name": "OnPoint Corporate",
 			"item": [
 				{
 					"name": "Corporate",
@@ -44824,7 +44824,7 @@
 			]
 		},
 		{
-			"name": "Wow Dispatcher",
+			"name": "OnPoint Dispatcher",
 			"item": [
 				{
 					"name": "dispatcher",
@@ -45452,7 +45452,7 @@
 			]
 		},
 		{
-			"name": "Wow Partner",
+			"name": "OnPoint Partner",
 			"item": [
 				{
 					"name": "partner",
