@@ -1,22 +1,22 @@
 const fs = require('fs');
-exports.extractCodeSnippetsFromStack = function(stack, depth) {
+exports.extractCodeSnippetsFromStack = function (stack, depth) {
     // Extract file paths from the stack
-    const filePaths = stack.match(/\(([^)]*+)\)/g);
+    const filePaths = stack.match(/\(([^)]*)\)/g);
     let codeSnippets = [];
-  
+
     // Read the file and extract relevant code snippets for the first two files
     for (let i = 0; i < Math.min(filePaths.length, depth); i++) {
-      const filePath = filePaths[i].replace(/[()]/g, '');
+        const filePath = filePaths[i].replace(/[()]/g, '');
 
-      if(filePath.includes("/")){
-          const [file, lineNumber] = extractFilePathAndLineNumber(filePath);
-          const codeLines = readCodeLinesFromFile(file, lineNumber);
-          codeSnippets.push({ file, code: codeLines });
-      }
+        if (filePath.includes("/")) {
+            const [file, lineNumber] = extractFilePathAndLineNumber(filePath);
+            const codeLines = readCodeLinesFromFile(file, lineNumber);
+            codeSnippets.push({ file, code: codeLines });
+        }
     }
-  
+
     return codeSnippets;
-  }
+}
 
 function extractFilePathAndLineNumber(filePath) {
     const matches = filePath.split(":");
@@ -47,7 +47,7 @@ function readCodeLinesFromFile(filePath, lineNumber) {
 
 const DEFAULT_REQUEST_INCLUDES = ["data", "headers", "method", "query_string", "url"];
 
-exports.extractRequestData = function(req, options) {
+exports.extractRequestData = function (req, options) {
     const { include = DEFAULT_REQUEST_INCLUDES } = options || {};
 
     const requestData = {};
